@@ -1,4 +1,4 @@
-const YANDEX_API_KEY = '10e46afb-0615-481a-9346-eadea994bea1'
+const YANDEX_API_KEY = '614b43cc-3089-4e90-95b7-c4085b6c0ab3'
 export default defineNuxtConfig({
   // @ts-ignore
   ssr: true,

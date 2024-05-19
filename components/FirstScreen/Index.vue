@@ -36,16 +36,16 @@
     }))
   }
 
-  let categories = toRefs(
-    fetchCategory.map(category => ({
-      id: category.id,
-      name: category.nameCategory,
-      subcategory: filterSubcategory(category.id),
-      isSelect: false
-    }))
-  )
+//   let categories = toRefs(
+//     fetchCategory.map(category => ({
+//       id: category.id,
+//       name: category.nameCategory,
+//       subcategory: filterSubcategory(category.id),
+//       isSelect: false
+//     }))
+//   )
 
-  settingsStore.setCategories(categories)
+//   settingsStore.setCategories(categories)
 </script>
 
 <style lang="scss" scoped>

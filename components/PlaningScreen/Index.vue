@@ -70,7 +70,7 @@
       }
     })
   }
-  await createSubCategoryById()
+//   await createSubCategoryById()
 
   const fetchOptimalRoute = async () => {
     const filterCat = subcategoryByCategory.value.filter(item => item.selected)
