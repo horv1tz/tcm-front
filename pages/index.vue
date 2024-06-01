@@ -53,12 +53,22 @@
   //   YANDEX MAP
   var myMap
 
+  let last_control
   const searchByCategory = (myMap, searchValue = 'Москва') => {
     let searchControl = new window.ymaps.control.SearchControl({
       options: {
         provider: 'yandex#search'
       }
     })
+
+    // Check if the control is on screen
+    if(last_control){
+      // And remove it to prevent clutter
+      myMap.controls.remove(last_control)
+    }
+    // assign current map control as the last control added
+    last_control = searchControl
+    // add control to map
     myMap.controls.add(searchControl)
 
     searchControl.search(searchValue)
