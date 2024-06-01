@@ -1,34 +1,48 @@
 <template>
   <div class="subcategory-list">
     <div
+
       v-for="subCategory in subcategoryList"
       :key="subCategory.id"
       class="item"
-      @click="setSubcategoryForSearch(subCategory.name)"
+      @click="setSubcategoryForSearch(subCategory.name, subCategory.id)"
     >
       <span>{{ subCategory.name }}</span>
-      <arrow-right width="20" />
+      <plus-icon v-if="bc.getChildrenOf(subCategory.id).length>0" width="20" />
+      <arrow-right v-else width="20" />
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-  import { toRefs } from 'vue'
+<script lang="ts">
+  import { toRefs, ref, computed } from 'vue'
   import { ICategoryList } from '~/services/interfaces'
   import ArrowRight from '~/components/icons/ArrowRight.vue'
+  import PlusIcon from '~/components/icons/PlusIcon.vue'
 
-  interface IProps {
-    subcategoryList: ICategoryList[]
+  export default {
+    components:{ArrowRight, PlusIcon},
+    props:['bc', 'subcategory-list'],
+    setup(props, ctx) {
+      const setSubcategoryForSearch = (categoryName: any, id:number) => {
+        ctx.emit('set-subcategory-for-map', categoryName, id)
+      }
+
+      const subcategoryList = computed(()=>{
+        return props.bc.list
+      })
+
+      const bc = props.bc
+
+      console.log('subcatlist', JSON.stringify(subcategoryList.value))
+      return {
+        setSubcategoryForSearch,
+        subcategoryList,
+        bc
+      }
+    }
   }
-
-  const props = defineProps<IProps>()
-  const { subcategoryList } = toRefs(props)
-
-  const emit = defineEmits(['set-subcategory-for-map'])
-
-  const setSubcategoryForSearch = (categoryName: any) => {
-    emit('set-subcategory-for-map', categoryName)
-  }
+  
 </script>
 
 <style lang="scss" scoped>
