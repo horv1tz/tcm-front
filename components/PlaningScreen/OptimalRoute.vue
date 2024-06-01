@@ -2,7 +2,14 @@
   <div class="routes">
     <div v-for="point in optimalRoutes" :key="point.id" class="point">
       <point-icon class="point-icon" />
-      {{ point.name }}
+      <div class="p_text">
+        <div class="p_name">
+          {{ point.name }}
+        </div>
+        <div class="p_desc">
+          {{point.details}}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -24,6 +31,13 @@
 </script>
 
 <style lang="scss" scoped>
+
+.p_desc{
+  font-size: 0.8em;
+  margin-top: 1em;
+  opacity: 0.7;
+}
+
   .routes {
     border-radius: 4.5px;
     background: rgba(255, 255, 255, 0.85);

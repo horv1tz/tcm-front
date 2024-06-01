@@ -35,7 +35,7 @@ export class Breadcrumbs {
 
     goBack(){
         if(this.trail.length<3){
-            return
+            return this
         }
         this.trail.pop()
         this.list = this.map.filter(e=>e.parentId === this.trail[this.trail.length-1])

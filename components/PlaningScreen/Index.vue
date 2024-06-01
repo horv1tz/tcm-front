@@ -116,15 +116,107 @@ export default {
       if (choices.length > 0) {
         // const formData = filterCat.map(item => item.name)
         isLoading.value = true
-
-        axios({
-          method: 'get',
-          url: `${APIURL}/api/places`,
-          headers: {
-            accept: "application/json"
+        let temp_places = [{
+            "id": 1,
+            "name": "Кинотеатр A",
+            "description": "Самый лучший кинотеатр в округе",
+            "categoryId": 4,
+            "latitude": 55.7558,
+            "longitude": 37.6176,
+            "pOptions": [
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "id": 2,
+            "name": "Парк развлечений B",
+            "description": "Чтобы весело провести время",
+            "categoryId": 5,
+            "latitude": 59.9343,
+            "longitude": 30.3351,
+            "pOptions": [
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "id": 3,
+            "name": "Арт-музей С",
+            "description": "Высокое искусство",
+            "categoryId": 7,
+            "latitude": 48.8566,
+            "longitude": 2.3522,
+            "pOptions": [
+              7,
+              8,
+              9
+            ]
+          },
+          {
+            "id": 4,
+            "name": "Исторический музей D",
+            "description": "Известный исторический музей",
+            "categoryId": 8,
+            "latitude": 51.5074,
+            "longitude": -0.1278,
+            "pOptions": [
+              10,
+              11,
+              12
+            ]
+          },
+          {
+            "id": 5,
+            "name": "Место 5",
+            "description": "Описание места 5",
+            "categoryId": 3,
+            "latitude": 40.7128,
+            "longitude": -74.006,
+            "pOptions": [
+              13,
+              14,
+              15
+            ]
+          },
+          {
+            "id": 6,
+            "name": "Место 6",
+            "description": "Описание места 6",
+            "categoryId": 3,
+            "latitude": 34.0522,
+            "longitude": -118.2437,
+            "pOptions": [
+              16,
+              17,
+              18
+            ]
           }
-        }).then(r => {
-          console.log(r.data)
+        ]
+        let home = {
+          id: 0,
+          name: "Дом",
+          description: "Ваше домашнее местоположение",
+          latitude: 55.6858985,
+          longitude: 37.5843767,
+        }
+
+        let coords_picker = []
+        coords_picker.push(home)
+
+        for (const c of choices) {
+          let sel = temp_places.filter(e=>e.categoryId===c)
+          if(sel.length){
+            coords_picker.push(sel[0])
+          }
+        }
+        coords_picker.push(home)
+
+        coords_picker = coords_picker.map(e=>{
+          e.details = e.description
+          return e
         })
 
         // Фейковые данные оптимального маршрута
@@ -146,8 +238,9 @@ export default {
             }
           ]
         }
-        console.log(Response)
-        optimalRoutes.value = Response.items
+
+
+        optimalRoutes.value = coords_picker
         optimalRouteIsShown.value = true
         isLoading.value = false
       }
