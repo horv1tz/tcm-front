@@ -1,5 +1,5 @@
 <template>
-  <div class="screen-card" @click="emit('select-card', card.id)">
+  <div class="screen-card" @click="$emit('select-card', card.id)">
     <header class="screen-card__header">
       <p class="title">{{ card.name }}</p>
       <app-checkbox :checkbox-value="card.isSelect" @change="card.isSelect = !card.isSelect" />
@@ -8,34 +8,24 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
   import AppCheckbox from '~/components/ui/AppCheckbox.vue'
   import { toRefs, computed } from 'vue'
 
-  interface ISubcategory {
-    id: number
-    name: string
-  }
-  interface IProps {
-    card: {
-      id: number
-      name: string
-      subcategory: ISubcategory[]
-      isSelect: boolean
+  export default {
+    components:{AppCheckbox},
+    props:['card', 'children', 'bc'],
+    setup(props, ctx) {
+      
+      const subcategoryList = computed(() => {
+        return (props.children || []).map(e=>e.name).join(', ')
+      })
+      const card = props.card
+      return {card, subcategoryList}
     }
   }
 
-  const emit = defineEmits<{
-    'select-card': [cardId: number]
-  }>()
-
-  const props = defineProps<IProps>()
-  const { card } = toRefs(props)
-
-  const subcategoryList = computed(() => {
-    const subcategoryList = card.value.subcategory.map(({ name }) => name)
-    return subcategoryList.join(', ')
-  })
+  
 </script>
 
 <style lang="scss" scoped>
