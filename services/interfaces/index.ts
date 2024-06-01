@@ -12,5 +12,5 @@ export interface ICategoryList {
 
 export interface ISettingState {
   initialProject: boolean
-  categories: ICategoryList[]
+  categories: any[]
 }
