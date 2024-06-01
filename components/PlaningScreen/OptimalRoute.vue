@@ -7,26 +7,20 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
   import { toRefs } from 'vue'
   import PointIcon from '~/components/icons/PointIcon.vue'
 
-  interface IRoutes {
-    id: number
-    name: string
-    category: string
-    subcategory: string
-    rating: number
-    coord_x: number
-    coord_y: number
-    short_descrip: any
+  export default {
+    props:['optroute'],
+    components:{PointIcon},
+    setup(props, ctx) {
+      const optimalRoutes = ref(props.optroute)
+      console.log(optimalRoutes.value)
+      return {optimalRoutes}
+    }
   }
-  interface IProps {
-    optimalRoutes: IRoutes[]
-  }
-
-  const props = defineProps<IProps>()
-  const { optimalRoutes } = toRefs(props)
+  
 </script>
 
 <style lang="scss" scoped>
