@@ -1,4 +1,4 @@
-const YANDEX_API_KEY = '614b43cc-3089-4e90-95b7-c4085b6c0ab3'
+const YANDEX_API_KEY = '105fbc1d-0843-4c0b-8975-5bc358b0a5d1'
 export default defineNuxtConfig({
   // @ts-ignore
   ssr: true,
@@ -38,7 +38,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiUrl: process.env.NUXT_PUBLIC_API_URL || 'https://a20047-194f.s.d-f.pw'
+      apiUrl: process.env.NUXT_PUBLIC_API_URL || 'https://api.dvorfs.com'
     }
   }
 })
